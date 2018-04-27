@@ -1,5 +1,6 @@
 let stationInfos = function(daCaux) {
 
+  let markers = [];
   for (let i=0; i<daCaux.length; i++) {
 
     // Recup des infos des stations
