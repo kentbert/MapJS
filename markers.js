@@ -1,7 +1,11 @@
 let stationInfos = function(daCaux) {
 
+<<<<<<< HEAD
   let markers = [];
   for (let i=0; i<daCaux.length; i++) {
+=======
+  $.getJSON("https://api.jcdecaux.com/vls/v1/stations?apiKey=xxxxxxxxxxxxxxxxxxxxxxxx&contract=lyon", function(daCaux) {
+>>>>>>> da01b0625bf997fe5f007c959c4e1ed3a64cbf6c
 
     // Recup des infos des stations
 
