@@ -20,7 +20,7 @@ $(document).ready(function() {
 
     ElSliderino();
 
-    $.getJSON("https://api.jcdecaux.com/vls/v1/stations?apiKey=bd36deba0672e9f5273b4c8b7bffe3436d2cbb92&contract=lyon", function(dataVelov) {
+    $.getJSON("https://api.jcdecaux.com/vls/v1/stations?apiKey=xxxxxxxxxxxxxxxe3436d2cbb92&contract=lyon", function(dataVelov) {
 
       let markers = [];
 
