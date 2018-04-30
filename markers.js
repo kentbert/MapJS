@@ -1,8 +1,15 @@
-function MarkerStation(address, status, lat, lng) {
-  let latLng = new google.maps.LatLng(lat,lng);
-  let marker = new google.maps.Marker({
-  position: latLng,
-  map: map,
-  animation: google.maps.Animation.DROP,
-  });
-}
+function MarkerStation(address, status, dispo, lat, lng, map) {
+
+    console.log ( map )
+
+    // Markers sur la map
+
+    let latLng = new google.maps.LatLng(lat, lng);
+    let marker = new google.maps.Marker({
+    position: latLng,
+    map: map,
+    });
+
+    return marker;
+
+  };

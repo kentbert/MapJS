@@ -1,3 +1,14 @@
+let map;
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 15,
+    center: new google.maps.LatLng(45.75,4.85),
+    mapTypeId: 'terrain',
+    disableDefaultUI: true,
+  });
+}
+
 $(document).ready(function() {
   $.when(
     $.getScript( "sliderino.js" ),
@@ -21,9 +32,14 @@ $(document).ready(function() {
           lat = dataVelov[i].position.lat;
           lng = dataVelov[i].position.lng;
 
-        MarkerStation(address, status, dispo, lat, lng);
+
+      let marker = MarkerStation(address, status, dispo, lat, lng, map);
+
+
+      markers.push(marker);
 
       };
+
 
 
     });
