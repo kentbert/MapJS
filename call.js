@@ -13,6 +13,7 @@ $(document).ready(function() {
   $.when(
     $.getScript( "sliderino.js" ),
     $.getScript( "markers.js" ),
+    $.getScript( "stations.js" ),
     $.Deferred(function( deferred ){
         $( deferred.resolve );
     })
@@ -20,7 +21,7 @@ $(document).ready(function() {
 
     ElSliderino();
 
-    $.getJSON("https://api.jcdecaux.com/vls/v1/stations?apiKey=xxxxxxxxxxxxxxxe3436d2cbb92&contract=lyon", function(dataVelov) {
+    $.getJSON("https://api.jcdecaux.com/vls/v1/stations?apiKey=bd36deba0672e9f5273b4c8b7bffe3436d2cbb92&contract=lyon", function(dataVelov) {
 
       let markers = [];
 
@@ -32,15 +33,14 @@ $(document).ready(function() {
           lat = dataVelov[i].position.lat;
           lng = dataVelov[i].position.lng;
 
-
       let marker = MarkerStation(address, status, dispo, lat, lng, map);
-
+      let infos = InfosStation(marker, address, status, dispo, map);
 
       markers.push(marker);
 
       };
 
-
+      let markerCluster = new MarkerClusterer(map, markers, {imagePath: "images/m"});
 
     });
   });
