@@ -14,12 +14,14 @@ $(document).ready(function() {
     $.getScript( "sliderino.js" ),
     $.getScript( "markers.js" ),
     $.getScript( "stations.js" ),
+    $.getScript( "signature.js" ),
     $.Deferred(function( deferred ){
         $( deferred.resolve );
     })
   ).done(function(data) {
 
     ElSliderino();
+    signature();
 
     $.getJSON("https://api.jcdecaux.com/vls/v1/stations?apiKey=bd36deba0672e9f5273b4c8b7bffe3436d2cbb92&contract=lyon", function(dataVelov) {
 
@@ -35,6 +37,7 @@ $(document).ready(function() {
 
       let marker = MarkerStation(address, status, dispo, lat, lng, map);
       let infos = InfosStation(marker, address, status, dispo, map);
+      let disporesa = DispoResa(dispo);
 
       markers.push(marker);
 
