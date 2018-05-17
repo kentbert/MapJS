@@ -21,7 +21,7 @@ $(document).ready(function() {
   ).done(function(data) {
 
     ElSliderino();
-    signature();
+    ElSignatores();
 
     $.getJSON("https://api.jcdecaux.com/vls/v1/stations?apiKey=bd36deba0672e9f5273b4c8b7bffe3436d2cbb92&contract=lyon", function(dataVelov) {
 
