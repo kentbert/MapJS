@@ -1,5 +1,5 @@
+// Google Maps
 let map;
-
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 15,
@@ -9,24 +9,25 @@ function initMap() {
   });
 }
 
+// Appel des différents fichiers JS de l'app
 $(document).ready(function() {
   $.when(
     $.getScript( "sliderino.js" ),
     $.getScript( "markers.js" ),
     $.getScript( "stations.js" ),
     $.getScript( "signature.js" ),
-    $.Deferred(function( deferred ){
-        $( deferred.resolve );
-    })
   ).done(function(data) {
 
     ElSliderino();
-    ElSignatores();
+    Signature();
 
+// JSON JCDecaux
     $.getJSON("https://api.jcdecaux.com/vls/v1/stations?apiKey=bd36deba0672e9f5273b4c8b7bffe3436d2cbb92&contract=lyon", function(dataVelov) {
 
+// Création des markers
       let markers = [];
 
+// Pour chaque objet du tableau, creer un nouveau set de données
       for (let i=0; i<dataVelov.length; i++) {
 
       let address = dataVelov[i].address;
@@ -34,17 +35,15 @@ $(document).ready(function() {
           dispo = dataVelov[i].available_bikes;
           lat = dataVelov[i].position.lat;
           lng = dataVelov[i].position.lng;
+          marker = MarkerStation(address, status, dispo, lat, lng, map);
+          infos = InfosStation(marker, address, status, dispo, map);
 
-      let marker = MarkerStation(address, status, dispo, lat, lng, map);
-      let infos = InfosStation(marker, address, status, dispo, map);
-      let disporesa = DispoResa(dispo);
-
+// Pousser le marker sur la map (api google)
       markers.push(marker);
-
       };
 
+// Regroupement de markers Maps (api google)
       let markerCluster = new MarkerClusterer(map, markers, {imagePath: "images/m"});
-
     });
   });
 });

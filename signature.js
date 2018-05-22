@@ -7,7 +7,7 @@ let clickY = new Array();
 let clickDrag = new Array();
 let paint;
 
-function ElSignatores() {
+function Signature() {
   canvas.addEventListener("mousedown", mouseDown, false);
   canvas.addEventListener("mousemove", mouseXY, false);
   document.body.addEventListener("mouseup", mouseUp, false);
