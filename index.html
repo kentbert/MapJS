@@ -43,14 +43,14 @@
               <p class="hidden md:block lg:block xl:block text-blue px-4 pb-4"><i class="fas fa-info-circle"></i> Vous pouvez utiliser les touches "a" et "e" de votre clavier pour naviguer dans le tutoriel.</p>
               <div class="bg-green-lighter text-green-darker p-8 flex flex-col justify-between leading-normal rounded-lg">
                 <p class="text-center text-5xl text-green-dark font-thin"><i class="fas fa-asterisk"></i> Etape 1</p>
-                <p class="text-base text-center py-4">Sur la carte, cliquez sur un <i class="fas fa-map-marker-alt text-red"></i> marqueur pour choisir la station où vous souhaitez effectuer la réservation.</p>
+                <p class="text-xl text-center py-4">Sur la carte, cliquez sur un <i class="fas fa-map-marker-alt text-red"></i> marqueur pour choisir la station où vous souhaitez effectuer la réservation.</p>
               </div>
             </div>
 
             <div class="card inactive">
               <div class="bg-green-lighter text-green-darker p-8 flex flex-col justify-between leading-normal rounded-lg">
                 <p class="text-center text-5xl text-green-dark font-thin"><i class="fas fa-asterisk"></i> Etape 2</p>
-                <p class="text-base text-center py-4">Signez à l'aide de votre <span class="inline lg:hidden xl:hidden"><i class="fas fa-hand-point-up"></i> doigt</span><span class="hidden lg:inline xl:inline"><i class="fas fa-mouse-pointer"></i> souris</span> dans l'encart prévu à cet effet.</p>
+                <p class="text-xl text-center py-4">Signez à l'aide de votre <span class="inline lg:hidden xl:hidden"><i class="fas fa-hand-point-up"></i> doigt</span><span class="hidden lg:inline xl:inline"><i class="fas fa-mouse-pointer"></i> souris</span> dans l'encart prévu à cet effet.</p>
               </div>
             </div>
 
@@ -102,7 +102,7 @@
             </div>
 
             <div class="w-4/5">
-              <p class="pt-8 pb-4 px-8 text-lg" id="adresse"></p>
+              <p class="pt-8 pb-4 px-8 text-lg" id="ladresse"></p>
             </div>
           </div>
         </div>
@@ -122,12 +122,14 @@
         </div>
 
         <!--- BRIQUE SIGNATURE -->
-        <div class="mt-4"></div>
-        <div class="mx-2">
-          <div class="bg-green-lightest text-green-dark rounded-lg">
-            <p class="p-8 text-center">Merci de signer ici :</p>
-            <canvas id="canvas" height="200"></canvas>
-            <div id="clearZig" class="p-8 text-center"></div>
+        <div class="sigbloc">
+          <div class="mt-4"></div>
+          <div class="mx-2">
+            <div class="bg-green-lightest text-green-dark rounded-lg">
+              <p class="p-8 text-center">Merci de signer ici :</p>
+              <canvas id="canvas" height="200"></canvas>
+              <div id="clearSig" class="p-8 text-center"></div>
+            </div>
           </div>
         </div>
 

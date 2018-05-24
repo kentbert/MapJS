@@ -1,60 +1,65 @@
-let cacheDataInfos_json = sessionStorage.getItem("reservation", "start");
+let cacheDataInfos_json = sessionStorage.getItem("reservation", "start", "adresse");
     cacheDataInfos = JSON.parse(cacheDataInfos_json);
 
     // Variables temps
-    dateResa = new Date().getTime();
     existingIntervalId = 0;
-    fiveMinutes = 60 * 5,
+    twentyMinutes = 10 * 1,
     display = document.querySelector('#time');
 
+
     // Boutons réservation
-    resaUp = "<button class='bg-green text-white text-3xl p-4 w-full hover:background-green-dark rounded-lg' id='resaup'><i class='fas fa-check'></i> Reserver !</button>";
-    resaDown = "<button class='bg-indigo text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed mx-8 my-4'>Indisponible</div>";
+    resaUp = "<button class='bg-green text-white text-3xl p-4 w-full hover:background-green-dark rounded-lg mt-2' id='resaup'><i class='fas fa-check'></i> Reserver !</button>";
+    resaDown = "<button class='bg-red text-white text-3xl p-4 w-full rounded-lg rounded opacity-50 cursor-not-allowed mt-2'>Indisponible</div>";
 
-function startTimer(duration, display, time) {
+function startTimer(duration, display, time, twentyMinutes) {
 
-  var start = sessionStorage.getItem("start"),
-        diff,
-        minutes,
-        seconds;
+let start = sessionStorage.getItem("start"),
+    diff,
+    minutes,
+    seconds;
 
-  if (start === null) { // si
-  start = Date.now();
-  sessionStorage.setItem("start", start);
+  if (start === null) {
+    start = Date.now();
+    sessionStorage.setItem("start", start);
+    setTimeout(function(){
+      sessionStorage.clear();
+      location.reload();
+    }, 10000);
   }
 
-    function timer() {
-        // Obtenir le nombre de secondes depuis que startimer a été call
-        diff = duration - (((Date.now() - start) / 1000) | 0);
+  function timer() {
+      // Obtenir le nombre de secondes depuis que startimer a été call
+      diff = duration - (((Date.now() - start) / 1000) | 0);
 
-        // Même chose mais en tronquant la virgule
-        minutes = (diff / 60) | 0;
-        seconds = (diff % 60) | 0;
+      // Même chose mais en tronquant la virgule
+      minutes = (diff / 60) | 0;
+      seconds = (diff % 60) | 0;
 
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        display.innerHTML = "<p class='text-lg leading-loose'>Il reste <span class='bg-red text-white text-xl rounded-lg p-2'>" + minutes + "</span> minutes et <span class='bg-red text-white text-xl rounded-lg p-2'>" + seconds + "</span> secondes à votre réservation.</p>";
+      display.innerHTML = "<p class='text-lg leading-loose'>Il reste <span class='bg-red text-white text-xl rounded-lg p-2'>" + minutes + "</span> minutes et <span class='bg-red text-white text-xl rounded-lg p-2'>" + seconds + "</span> secondes à votre réservation.</p>";
 
-        if (diff <= 0) {
-            // Ajouter une seconde pour que le timer commence à la bonne durée
-            start = Date.now() + 1000;
-        }
+      if (diff <= 0) {
+          // Ajouter une seconde pour que le timer commence à la bonne durée
+          start = Date.now() + 1000;
+      }
     }
     // Tout en s'assurant que le timer n'attend pas une seconde entière avant de démarrer
     timer();
     existingIntervalId = setInterval(timer, 1000);
+
 }
 
-// Si il y a un élément dans la sessionstorage, alors reprendre le timer
+// Sessionstorage remplie
 if (sessionStorage.length > 0) {
-  $(".containerslider").toggle(false);
+  $(".containerslider").toggle(false); // On cache par défaut le tuto
 
-  startTimer(fiveMinutes, display);
+  startTimer(twentyMinutes, display); // On reprend le timer
 
   document.getElementById("alert").innerHTML =
   "<div class='bg-blue text-white p-8 text-lg font-thin m-2 rounded-lg'><p>Une réservation a été précédemment enregistrée pour l'adresse <strong class='uppercase font-bold'>" + cacheDataInfos.address + "</strong></p></div>"
-  } else {};
+};
 
 // La fonction principale qui gère le clic sur une station
 function InfosStation(marker, adresse, status, dispo, map) {
@@ -63,30 +68,37 @@ function InfosStation(marker, adresse, status, dispo, map) {
 
     window.scrollTo(0,0);
 
-    $(".containerslider").toggle(false);
+    // Affichage de l'encart de station
     $("#station").toggle(true);
-
-    document.getElementById("adresse").innerHTML =
-    "Vous êtes à la station <strong class='font-bold'>" + adresse + "</strong>.";
-
-    document.getElementById("clearZig").innerHTML =
-    "<button class='text-green-dark'><i class='fas fa-sync-alt'></i> Recommencer la signature</button>"
-
-    document.getElementById("dispo").innerHTML =
-    "Il reste <strong>" + dispo + " vélos" + "</strong>.";
-
-    document.getElementById("resa").innerHTML =
-    DispoResa(dispo);
-
     $("#station").addClass("w-full sm:w-full md:w-full lg:w-2/5 xl:w-2/5");
     $("#map").addClass("w-full sm:w-full md:w-full lg:w-3/5 xl:w-3/5");
 
-    // Lorsque le bouton réservé est cliqué
+    // Masquage du slider et du bouton de réservation...
+    $(".containerslider").toggle(false);
+    $("#resa").toggle(false);
+
+    // ... Car celui-ci nécessite un clic sur l'élement canvas pour s'afficher
+    $("#canvas" ).mousedown(function() {
+      $("#resa").toggle(true);
+    });
+
+    document.getElementById("ladresse").innerHTML =
+    "Vous êtes à la station <strong class='font-bold'>" + adresse + "</strong>.";
+
+    document.getElementById("clearSig").innerHTML =
+    "<button class='text-green-dark'><i class='fas fa-sync-alt'></i> Recommencer la signature</button>"
+
+    dispoCount(adresse, status, dispo);
+
+    document.getElementById("resa").innerHTML =
+    dispoResa(dispo);
+
+    // Lorsque le bouton réserver est cliqué
     document.getElementById("resaup").onclick = function(){
       sessionStorage.clear();
       clearInterval(existingIntervalId);
-      startTimer(fiveMinutes, display);
-      sessionStorage.setItem("reservation", JSON.stringify({address : adresse, time : dateResa}));
+      startTimer(twentyMinutes, display);
+      sessionStorage.setItem("reservation", JSON.stringify({address : adresse}));
       sessionStorage.getItem("start"),
       document.getElementById("alert").innerHTML =
       "<div class='bg-green text-white p-8 text-lg font-thin m-2 rounded-lg'><p>Station <strong class='uppercase'>" + adresse + "</strong> réservée !</p>"
@@ -96,21 +108,28 @@ function InfosStation(marker, adresse, status, dispo, map) {
   });
 };
 
-$(function() {
-  $("body").click(function(e) {
-    if (e.target.id == "canvas" || $(e.target).parents("#canvas").length) {
-      $("#resaup").toggle(true);
-    } else {
-      $("#resaup").toggle(false);
+function dispoCount (adresse, status, dispo) {
+  if (dispo === 0) {
+    document.getElementById("dispo").innerHTML =
+    "Il n'y a plus de vélo disponible."
     }
-  });
-})
+  else if (dispo === 1) {
+    document.getElementById("dispo").innerHTML =
+    "Il ne reste plus qu'un vélo !"
+    }
+  else {
+    document.getElementById("dispo").innerHTML =
+    "Il reste " + dispo + " vélos."
+  }
+}
 
-function DispoResa (dispo) {
+
+function dispoResa (dispo) {
   if (dispo > 0) {
       return resaUp;
     }
   else {
+      $("#resa").toggle(true);
       return resaDown;
     };
 };

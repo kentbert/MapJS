@@ -14,8 +14,8 @@ $(document).ready(function() {
   $.when(
     $.getScript( "sliderino.js" ),
     $.getScript( "markers.js" ),
-    $.getScript( "stations.js" ),
     $.getScript( "signature.js" ),
+    $.getScript( "stations.js" ),
   ).done(function(data) {
 
     ElSliderino();

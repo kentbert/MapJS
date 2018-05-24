@@ -23,8 +23,8 @@ function ElSliderino() {
       slides[currentSlide].className = "card active";
   }
 
-  var next = document.getElementById("next");
-  var previous = document.getElementById("previous");
+  let next = document.getElementById("next");
+  let previous = document.getElementById("previous");
 
   next.onclick = function() {
     nextCard();
