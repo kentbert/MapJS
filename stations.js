@@ -6,10 +6,6 @@ let cacheDataInfos_json = sessionStorage.getItem("reservation", "start", "adress
     twentyMinutes = 20 * 60,
     display = document.querySelector('#time');
 
-    // Boutons réservation
-    resaUp = "<button class='bg-green text-white text-3xl p-4 w-full hover:background-green-dark rounded-lg mb-4' id='resaup'><i class='fas fa-check'></i> Reserver !</button>";
-    resaDown = "<button class='bg-red text-white text-3xl p-4 w-full rounded-lg rounded opacity-50 cursor-not-allowed mb-4'>Indisponible</div>";
-
 function startTimer(duration, display, time, twentyMinutes) {
 
 let start = sessionStorage.getItem("start"),
@@ -46,7 +42,8 @@ let start = sessionStorage.getItem("start"),
       location.reload();
       }
     }
-    // Tout en s'assurant que le timer n'attend pas une seconde entière avant de démarrer
+
+    // On s'assure que le timer n'attend pas une seconde entière avant de démarrer
     timer();
     existingIntervalId = setInterval(timer, 1000);
   }
@@ -126,6 +123,10 @@ function dispoCount (adresse, status, dispo) {
     "Il reste " + dispo + " vélos."
   }
 }
+
+    // Boutons réservation
+    resaUp = "<button class='bg-green text-white text-3xl p-4 w-full hover:background-green-dark rounded-lg mb-4' id='resaup'><i class='fas fa-check'></i> Reserver !</button>";
+    resaDown = "<button class='bg-red text-white text-3xl p-4 w-full rounded-lg rounded opacity-50 cursor-not-allowed mb-4'>Indisponible</button>";
 
 
 function dispoResa (dispo) {

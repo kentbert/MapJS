@@ -26,14 +26,15 @@ function Signature() {
   context.lineJoin = "miter";
   context.lineWidth = 2;
 
+
   for (var i = 0; i < clickX.length; i++) {
-    context.beginPath();
+    context.beginPath();  // Commencer le path 
     if (clickDrag[i] && i) {
-    	context.moveTo(clickX[i - 1], clickY[i - 1]);
+    	context.moveTo(clickX[i - 1], clickY[i - 1]); // Mouvement
     } else {
-    	context.moveTo(clickX[i] - 1, clickY[i]);
+    	context.moveTo(clickX[i] - 1, clickY[i]); // Mouvement
     }
-    context.lineTo(clickX[i], clickY[i]);
+    context.lineTo(clickX[i], clickY[i]); // Puis on dessine la ligne
     context.stroke();
     context.closePath();
     }
