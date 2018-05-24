@@ -30,9 +30,9 @@ function Signature() {
   for (var i = 0; i < clickX.length; i++) {
     context.beginPath();  // Commencer le path
     if (clickDrag[i] && i) {
-    	context.moveTo(clickX[i - 1], clickY[i - 1]); // Mouvement
+    	context.moveTo(clickX[i - 1], clickY[i - 1]); // Se place a la position du point d'avant
     } else {
-    	context.moveTo(clickX[i] - 1, clickY[i]); // Mouvement
+    	context.moveTo(clickX[i] - 1, clickY[i]); // Si c'est le premier clic
     }
     context.lineTo(clickX[i], clickY[i]); // Puis on dessine la ligne
     context.stroke();
