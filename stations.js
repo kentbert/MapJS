@@ -40,6 +40,7 @@ let start = sessionStorage.getItem("start"),
           start = Date.now() + 1000;
       }
 
+          // Si le timer arrive à 0, clear la session et reload la page
       if (diff === 0) {
       sessionStorage.clear();
       location.reload();
