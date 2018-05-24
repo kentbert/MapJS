@@ -40,7 +40,7 @@ function Signature() {
   }
 
   // Recommencer signature
-  $('#clearSig').click(
+  $('#clearSig , #resa').click(
     function clearSig() {
       clickX = new Array();
       clickY = new Array();

@@ -3,7 +3,7 @@ let cacheDataInfos_json = sessionStorage.getItem("reservation", "start", "adress
 
     // Variables temps
     existingIntervalId = 0;
-    twentyMinutes = 10 * 1,
+    twentyMinutes = 60 * 20,
     display = document.querySelector('#time');
 
 
@@ -21,10 +21,6 @@ let start = sessionStorage.getItem("start"),
   if (start === null) {
     start = Date.now();
     sessionStorage.setItem("start", start);
-    setTimeout(function(){
-      sessionStorage.clear();
-      location.reload();
-    }, 10000);
   }
 
   function timer() {
@@ -49,6 +45,10 @@ let start = sessionStorage.getItem("start"),
     timer();
     existingIntervalId = setInterval(timer, 1000);
 
+    setTimeout(function(){
+      sessionStorage.clear();
+      location.reload();
+    }, 120000);
 }
 
 // Sessionstorage remplie
@@ -79,6 +79,10 @@ function InfosStation(marker, adresse, status, dispo, map) {
 
     // ... Car celui-ci nécessite un clic sur l'élement canvas pour s'afficher
     $("#canvas" ).mousedown(function() {
+      $("#resa").toggle(true);
+    });
+
+   $('#canvas').on('touchstart', function(){
       $("#resa").toggle(true);
     });
 
