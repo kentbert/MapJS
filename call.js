@@ -18,7 +18,7 @@ $(document).ready(function() {
     $.getScript( "stations.js" ),
   ).done(function(data) {
 
-    ElSliderino();
+    leSlider();
     Signature();
 
 // JSON JCDecaux

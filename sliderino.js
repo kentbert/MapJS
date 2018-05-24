@@ -1,4 +1,4 @@
-function ElSliderino() {
+function leSlider() {
 
 // Pouvoir fermer le slider
   $(".close").click(function(){

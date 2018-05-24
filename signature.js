@@ -28,7 +28,7 @@ function Signature() {
 
 
   for (var i = 0; i < clickX.length; i++) {
-    context.beginPath();  // Commencer le path 
+    context.beginPath();  // Commencer le path
     if (clickDrag[i] && i) {
     	context.moveTo(clickX[i - 1], clickY[i - 1]); // Mouvement
     } else {
