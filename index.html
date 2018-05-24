@@ -8,92 +8,157 @@
     <link href="style.css" rel="stylesheet">
 
     <style>
-      #map {height:100vh;clear:both;}
+      canvas {
+          padding-left:0;
+          padding-right:0;
+          margin-left:auto;
+          margin-right:auto;
+          display:block;
+          width:300px;
+      }
 
       #slider{position:relative;width:100%;clear:both;}
         .card {opacity:0;width:100%;}
         .active{opacity:1;}
         .inactive{display:none;}
+
+      #station {display:none;}
+        .uppercase {text-transform:uppercase;}
     </style>
   </head>
   <body>
 
-    <div class="container mx-auto">
 
-    <h1 class="p-8">Réservation Vélov'</h1>
+        <!---Sliderino--->
+    <div class="containerslider">
+      <div class="container mx-auto my-2">
 
-      <!---Sliderino--->
-      <div class="mb-8">
-      <div class="containerslider">
+        <button class="text-red hover:text-red-darker text-white py-2 px-4 controls float-right close">
+          <i class="far fa-times-circle"></i> Fermer le tutoriel
+        </button>
 
-      <button class="bg-red-light hover:bg-red text-white font-bold py-2 px-4 controls float-left close">
-        <svg class="svg-icon cross" viewBox="0 0 20 20">
-        	<path fill="none" d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"></path>
-				</svg>
-      </button>
-
-        <div id="slider">
-          <div class="card active">
-            <div class="bg-purple text-white px-8 py-2 flex flex-col justify-between leading-normal">
-              <h2>Comment ça marche ?</h2>
-              <p class="hidden md:block lg:block xl:block"><small>Vous pouvez utiliser les touches "a" et "e" de votre clavier pour naviguer dans le tutoriel.</small></p>
+          <div id="slider">
+            <div class="card active">
+              <h2 class="text-4xl font-thin p-4">Réservez ici votre <strong class="text-green">Vélov</strong>.</h2>
+              <p class="hidden md:block lg:block xl:block text-blue px-4 pb-4"><i class="fas fa-info-circle"></i> Vous pouvez utiliser les touches "a" et "e" de votre clavier pour naviguer dans le tutoriel.</p>
+              <div class="bg-green-lighter text-green-darker p-8 flex flex-col justify-between leading-normal rounded-lg">
+                <p class="text-center text-5xl text-green-dark font-thin"><i class="fas fa-asterisk"></i> Etape 1</p>
+                <p class="text-xl text-center py-4">Sur la carte, cliquez sur un <i class="fas fa-map-marker-alt text-red"></i> marqueur pour choisir la station où vous souhaitez effectuer la réservation.</p>
+              </div>
             </div>
-            <div class="bg-blue text-white p-8 flex flex-col justify-between leading-normal">
-              <p class="text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
-            </div>
-          </div>
 
-          <div class="card inactive">
-            <div class="bg-red text-white p-8 flex flex-col justify-between leading-normal">
-              <h2>Comment ça marche ?</h2>
-              <p class="text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+            <div class="card inactive">
+              <div class="bg-green-lighter text-green-darker p-8 flex flex-col justify-between leading-normal rounded-lg">
+                <p class="text-center text-5xl text-green-dark font-thin"><i class="fas fa-asterisk"></i> Etape 2</p>
+                <p class="text-xl text-center py-4">Signez à l'aide de votre <span class="inline lg:hidden xl:hidden"><i class="fas fa-hand-point-up"></i> doigt</span><span class="hidden lg:inline xl:inline"><i class="fas fa-mouse-pointer"></i> souris</span> dans l'encart prévu à cet effet.</p>
+              </div>
             </div>
-          </div>
 
-          <div class="card inactive">
-            <div class="bg-green text-white p-8 flex flex-col justify-between leading-normal">
-              <h2>Comment ça marche ?</h2>
-              <p class="text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+            <div class="card inactive">
+              <div class="bg-green text-white p-8 flex flex-col justify-between leading-normal">
+                <h2>Comment ça marche ?</h2>
+                <p class="text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="slidercontrols text-right">
-          <div class="inline-flex">
-            <button class="bg-green hover:bg-green-light py-2 px-4 controls" id="previous">
-              <svg class="svg-icon" viewBox="0 0 20 20">
-  							<path fill="none" d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
-  						</svg>
-            </button>
-            <button class="bg-green hover:bg-green-light py-2 px-4 controls" id="next">
-              <svg class="svg-icon" viewBox="0 0 20 20">
-  							<path fill="none" d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-  						</svg>
-            </button>
+          <div class="slidercontrols text-right">
+            <div class="inline-flex">
+              <button class="bg-green hover:bg-green-light py-2 px-4 mt-2 controls rounded-lg" id="previous">
+                <svg class="svg-icon" viewBox="0 0 20 20">
+    							<path fill="none" d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
+    						</svg>
+              </button>
+              <button class="bg-green hover:bg-green-light py-2 px-4 ml-2 mt-2 controls rounded-lg" id="next">
+                <svg class="svg-icon" viewBox="0 0 20 20">
+    							<path fill="none" d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+    						</svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
+  <div class="container mx-auto">
 
-    <div id="map"></div>
 
+  <div id="alert"></div>
+
+  <div id="time" class="text-center p-8"></div>
+
+    <div class="flex flex-wrap">
+
+      <div id="station">
+        <div class="text-center text-blue p-8 m-2">
+          <h2 class="font-light">Nouvelle réservation</h2>
+        </div>
+
+        <!--- BRIQUE ADRESSE -->
+        <div class="mt-4"></div>
+        <div class="mx-2">
+          <div class="flex flex-wrap text-orange-dark bg-orange-lightest rounded-lg">
+            <div class="w-1/5">
+              <p class="p-8"><i class="fas fa-map-marker-alt text-4xl"></i></p>
+            </div>
+
+            <div class="w-4/5">
+              <p class="pt-8 pb-4 px-8 text-lg" id="ladresse"></p>
+            </div>
+          </div>
+        </div>
+
+        <!--- BRIQUE VELOS RESTANTS -->
+        <div class="mt-4"></div>
+          <div class="mx-2">
+          <div class="flex flex-wrap text-teal-dark bg-teal-lightest rounded-lg">
+            <div class="w-1/5">
+              <p class="p-8"><i class="fas fa-bicycle text-3xl"></i></p>
+            </div>
+
+            <div class="w-4/5">
+              <p class="pt-8 px-8 text-lg" id="dispo"></p>
+            </div>
+          </div>
+        </div>
+
+        <!--- BRIQUE SIGNATURE -->
+        <div class="sigbloc">
+          <div class="mt-4"></div>
+          <div class="mx-2">
+            <div class="bg-green-lightest text-green-dark rounded-lg">
+              <p class="p-8 text-center">Merci de signer ici :</p>
+              <canvas id="canvas" height="200"></canvas>
+              <div id="clearSig" class="p-8 text-center"></div>
+            </div>
+          </div>
+        </div>
+
+        <!--- BRIQUE RESERVATION -->
+        <div id="resa" class="m-2"></div>
+        <div id="alert2"></div>
+      </div>
+
+      <div id="map" class="w-full h-screen rounded-lg"></div>
+
+      </div>
     </div>
+  </div>
+  <div class="mt-8"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+
+    <script src="call.js">
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeUEKTrVHo3v4fGN5oAyb20NeXuf9Jh2Y&callback=initMap">
+    </script>
 
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
 
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeUEKTrVHo3v4fGN5oAyb20NeXuf9Jh2Y&callback=initMap">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous">
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-    </script>
-    <script src="sliderino.js">
-    </script>
-    <script src="map.js">
-    </script>
-    <script src="markers.js">
-    </script>
-    <script src="call.js">
-    </script>
+
   </body>
 </html>
