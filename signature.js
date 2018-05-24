@@ -20,22 +20,22 @@ function Signature() {
   document.body.addEventListener("touchcancel", mouseUp, false);
 
   function draw() {
-  context.clearRect(0, 0, canvas.width, canvas.height); // Clears the canvas
+  context.clearRect(0, 0, canvas.width, canvas.height);
 
-  context.strokeStyle = "#000000";  //set the "ink" color
-  context.lineJoin = "miter";       //line join
-  context.lineWidth = 2;            //"ink" width
+  context.strokeStyle = "#000000";
+  context.lineJoin = "miter";
+  context.lineWidth = 2;
 
   for (var i = 0; i < clickX.length; i++) {
-    context.beginPath();                               //create a path
+    context.beginPath();
     if (clickDrag[i] && i) {
-    	context.moveTo(clickX[i - 1], clickY[i - 1]);  //move to
+    	context.moveTo(clickX[i - 1], clickY[i - 1]);
     } else {
-    	context.moveTo(clickX[i] - 1, clickY[i]);      //move to
+    	context.moveTo(clickX[i] - 1, clickY[i]);
     }
-    context.lineTo(clickX[i], clickY[i]);              //draw a line
-    context.stroke();                                  //filled with "ink"
-    context.closePath();                               //close path
+    context.lineTo(clickX[i], clickY[i]);
+    context.stroke();
+    context.closePath();
     }
   }
 
