@@ -3,13 +3,12 @@ let cacheDataInfos_json = sessionStorage.getItem("reservation", "start", "adress
 
     // Variables temps
     existingIntervalId = 0;
-    twentyMinutes = 60 * 20,
+    twentyMinutes = 20 * 60,
     display = document.querySelector('#time');
 
-
     // Boutons réservation
-    resaUp = "<button class='bg-green text-white text-3xl p-4 w-full hover:background-green-dark rounded-lg mt-2' id='resaup'><i class='fas fa-check'></i> Reserver !</button>";
-    resaDown = "<button class='bg-red text-white text-3xl p-4 w-full rounded-lg rounded opacity-50 cursor-not-allowed mt-2'>Indisponible</div>";
+    resaUp = "<button class='bg-green text-white text-3xl p-4 w-full hover:background-green-dark rounded-lg mb-4' id='resaup'><i class='fas fa-check'></i> Reserver !</button>";
+    resaDown = "<button class='bg-red text-white text-3xl p-4 w-full rounded-lg rounded opacity-50 cursor-not-allowed mb-4'>Indisponible</div>";
 
 function startTimer(duration, display, time, twentyMinutes) {
 
@@ -40,16 +39,16 @@ let start = sessionStorage.getItem("start"),
           // Ajouter une seconde pour que le timer commence à la bonne durée
           start = Date.now() + 1000;
       }
+
+      if (diff === 0) {
+      sessionStorage.clear();
+      location.reload();
+      }
     }
     // Tout en s'assurant que le timer n'attend pas une seconde entière avant de démarrer
     timer();
     existingIntervalId = setInterval(timer, 1000);
-
-    setTimeout(function(){
-      sessionStorage.clear();
-      location.reload();
-    }, 120000);
-}
+  }
 
 // Sessionstorage remplie
 if (sessionStorage.length > 0) {
