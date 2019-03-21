@@ -22,7 +22,7 @@ $(document).ready(function() {
     Signature();
 
 // JSON JCDecaux
-    $.getJSON("https://api.jcdecaux.com/vls/v1/stations?apiKey=bd36deba0672e9f5273b4c8b7bffe3436d2cbb92&contract=lyon", function(dataVelov) {
+    $.getJSON("https://api.jcdecaux.com/vls/v1/stations?apiKey=tmoccchhh&contract=lyon", function(dataVelov) {
 
 // Création des markers
       let markers = [];
